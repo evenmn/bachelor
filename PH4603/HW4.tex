@@ -1,0 +1,49 @@
+\documentclass[norsk,a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} %for å inkludere grafikk
+\usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{physics}
+
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+\title{PH4603 - Soft Condensed Matter Physics\\\vspace{2mm} \Large{Homework 4}}
+\author{\large Even Marius Nordhagen}
+\date\today
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+\begin{description}
+\item [a)] \textbf{Show that the bulk modulus of an ideal gas is given by}
+\begin{equation}
+K=nk_BT
+\end{equation}
+\end{description}
+
+\section*{Problem 3}
+\textbf{Show that}
+\begin{equation}
+\frac{\partial \langle q\rangle}{\partial \text{pH}}=-\frac{e_0\ln10\exp\Big[-\ln10(\text{pH}-\text{pK})\Big]}{Z^2}
+\end{equation}
+Let's start with
+\begin{equation}
+\langle q\rangle = \frac{1}{Z}(q_0+(q_0+e_0)\exp[-\beta E])
+\end{equation}
+where $Z$ and $E$ both are dependent on pH. 
+$$\frac{\partial\langle q\rangle}{\partial \text{pH}}=-\frac{Z'(\text{pH})}{Z^2}(q_0+(q_0+e_0)\exp[-\beta E])+\frac{1}{Z}(-\beta E'(\text{pH})(q_0+e_0)\exp[-\beta E])$$ 
+
+\end{document}

@@ -1,0 +1,95 @@
+\documentclass[norsk,a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} %for å inkludere grafikk
+\usepackage{verbatim} %for å inkludere filer med tegn LaTeX ikke liker
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+\title{PH4603 - Soft Condensed Matter Physics\\\vspace{2mm} \Large{Homework 2}}
+\author{\large Even Marius Nordhagen}
+\date\today
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+\begin{description}
+\item [a)] The average end-to-end distance of a 1D polymer is given by
+\begin{equation}
+\langle x\rangle=(+a)p_++(-a)p_-
+\end{equation}
+$$=ap-a(1-p)=ap+ap-a=\underline{a(2p-1)}$$
+If $p_+=p_-=1/2$, we end up with $\langle x\rangle = 0$. This makes sense physically, since as many segments will point in +x direction as -x direction. The mean-squared end-to-end distance is given by a similar formula
+\begin{equation}
+\langle x^2\rangle=(+a)^2p_++(-a)^2p_-=a^2.
+\end{equation}
+As we can see, this distance is independent on $p$.
+\item [b)] If now $p>1/2$, and we use the same formula as in part a), we obtain
+$$\langle x\rangle=a(2p-1)>0$$, which also makes sense physically. The mean-squared end-to-end distance is not dependent on $p$, so it's the same as for $p=1/2$.
+
+\end{description}
+\newpage
+\section*{Problem 2}
+\begin{equation}
+P(R)=\bigg(\frac{3}{2\pi\langle R^2\rangle}\bigg)\exp{-\bigg(\frac{3R^2}{2\langle R^2\rangle}\bigg)}
+\label{eq:P}
+\end{equation}
+\begin{description}
+\item [a)]For the most likely state we know that Helmholtz free energy 
+\begin{equation}
+F=E-TS
+\end{equation}
+is minimized. We assume an ideal polymer, such that $U(R,..)\simeq0$:
+\begin{equation}
+F\simeq-TS.
+\end{equation}
+If we stretch the polymer, the chain will no longer be in the most likely state, and the free energy increases (no longer minimized). The temperature is not changing, which means that the entropy is decreased (notice the negative sign).
+\item [b)] The famous entropy formula states that
+\begin{equation}
+S(R,N)=k\log\Omega(R,N)
+\end{equation}
+We assume that the probability is proportional $P(R)$ to the multiplicity $\Omega(R,N)$, so
+\begin{equation}
+S(R,N)=k\log P(R).
+\label{eq:S}
+\end{equation}
+In our case the end-to-end distance $R=R_1$, and the mean-squared average distance can be simplified such:
+\begin{equation}
+\langle R^2\rangle=\langle\vec{R}\cdot\vec{R}\rangle= \bigg\langle\sum_{i=1}^N\vec{r}_i\sum_{j=1}^N\vec{r}_j\bigg\rangle= \bigg\langle\sum_{i=1}^N\vec{r}_i^2+\sum_{i=1}^N\sum_{j\neq1}^N\vec{r}_i\vec{r}_j\bigg\rangle=Nb^2
+\end{equation}
+because $\langle \vec{r}_i\rangle$ obviously is equal to the monomere length squared, and the second term is zero due to no correlation. By inserting equation (\ref{eq:P}) into equation (\ref{eq:S}) we obtain
+$$S(R_1,N)=k\log\Bigg(\frac{3}{2\pi Nb^2}\exp{\bigg[-\bigg(\frac{3R_1^2}{2Nb^2}\bigg)\bigg]}\Bigg)$$
+%$$=k\Bigg(\log\bigg(\frac{3}{2\pi Nb^2}\bigg)-\bigg(\frac{3R_1^2}{2Nb^2}\bigg)\Bigg)$$
+\begin{equation}
+S(R_1,N)=S(N)-\frac{3kR_1^2}{2Nb^2}
+\end{equation}
+where 
+\begin{equation}
+S(N)=k\log\bigg(\frac{3}{2\pi Nb^2}\bigg)
+\end{equation}
+and is therefore only dependent on $N$.
+
+\end{description}
+\section*{Problem 3}
+We are studying an ideal mixture of A and B, where the limit of solubility of $A$ is $\phi_m$. It means that if $\phi>\phi_m$, we will no longer be able to solve $B$ properly in $A$. We will use Flory's parameter $\chi$, which makes it easy to find the energy of mixing:
+\begin{equation}
+U_{mix}=\chi\phi_A\phi_B
+\end{equation}
+and from here we can go further and calculate the mixing force. I decide to scale with respect to $k_BT$:
+$$\frac{F_{mix}}{k_BT}=\chi\phi(1-\phi)+\phi\log\phi+(1-\phi)\ln(1-\phi)$$
+$$=\chi\phi(1-\phi)+\phi\ln\bigg(\frac{\phi}{1-\phi}\bigg)+\ln(1-\phi)$$
+Furthermore we need to use the fact that $\phi(\infty)=\phi_m$ and express $\phi(\chi)$ using the boundary condition.
+\end{document}

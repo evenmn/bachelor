@@ -1,0 +1,11 @@
+#3.16
+import numpy as np
+s=1
+m=0
+def gauss(x,s,m):
+    F=(1/(np.sqrt(2*np.pi)*s))*np.exp(-0.5*((x-m)/float(s))**2)
+    return F
+x_list=np.linspace(m-5*s,m+5*s,20)
+print 'x         gauss'
+for x in x_list:
+    print '%.2f      %.2f'%(x,gauss(x,s,m))

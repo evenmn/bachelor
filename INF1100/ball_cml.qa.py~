@@ -1,0 +1,11 @@
+#4.11
+from sys import argv
+try: 
+    t=float(argv[1])
+except:
+    raise IndexError
+    t=raw_input('t=')
+v0=float(argv[2])
+g=9.81
+y=v0*t-0.5*g*t**2
+print y

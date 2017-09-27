@@ -1,0 +1,23 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+c_1 = 1
+
+def f(x, c_2):
+    return c_1*(x**(-1)-x**(-7)) + c_2*x**2*(x**(-1)-x**(-7))
+
+x = np.linspace(1, 7, 1000)
+c_2_list = [c_1, c_1/2., c_1/5., 0]
+
+for c_2 in c_2_list:
+    plt.plot(x, f(x, c_2))
+plt.legend([r'$c_2=c_1$', '$c_2=c_1/2$', '$c_2=c_1/5$', '$c_2=0$'],
+            loc = 'best')
+
+label_size = {'size':'16'}
+plt.title('Equilibrium', **label_size)
+plt.xlabel(r'$\lambda$', **label_size)
+plt.ylabel(r'$\frac{R\Delta P}{2h}$', **label_size)
+plt.axis([0.5, 7.5, -0.5, 4.5])
+plt.grid()
+plt.show()

@@ -1,0 +1,12 @@
+import numpy as np
+
+def f(x):
+    return x**2
+
+def table(f, a, b, n, filename):
+    x_list = np.linspace(a,b,n)
+    outfile = open(filename,'w')
+    for x in x_list:
+        outfile.write('%4.3f %8.3f\n'%(x,f(x)))
+
+table(f, 0, 10, 100, "myfile.txt")

@@ -1,0 +1,16 @@
+import numpy as np
+
+g=9.81
+L=1.0
+h=0.1
+theta0=np.arcsin(h/L)
+
+def X(t):
+    return h*np.sin(theta0*np.cos(np.sqrt(g/L)*t))
+
+t=np.linspace(0,10,100)
+
+import matplotlib.pyplot as plt
+
+plt.plot(t,X)
+plt.show()

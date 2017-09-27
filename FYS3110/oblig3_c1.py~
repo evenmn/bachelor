@@ -1,0 +1,43 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from numpy.linalg import eigh
+
+#Constants
+g=1
+V=4
+N=20
+
+#Matrices
+I=np.identity(N)        # Taking columns from I
+A=np.zeros([N,N])       # A is the outer product
+A[0,0]=1                # |0><0|
+
+#Hamiltonian
+gpart=0
+for i in range(N-1):
+    gpart+=np.outer(I[i],I[i+1])+np.outer(I[i+1],I[i])
+H=g*gpart-V*A
+[eigvals,eigmat]=eigh(H)    # Gives the eigenvalues and
+                            # eigenvectors of a hamiltonian
+
+#Exercise D
+P=np.zeros(N)
+for i in range(N):
+    P[i] = np.inner(I[0],eigmat[i])
+
+#Exercise E
+X=np.zeros([N,N])
+for i in range(N):
+    X[i,i]=i
+a=np.inner(X,eigmat[0])
+b=np.inner(eigmat[0],a)
+print b
+
+#Plot
+SZ={'size':'14'}            #Size of label
+for value in eigvals:
+    plt.axhline(value)      #Plot hor. line for eigenvalues
+plt.axis([0,1,-5,3])        #Set axis
+plt.title('The Energy eigenstates',**SZ)
+plt.ylabel('Eigenvalues',**SZ)
+plt.show()

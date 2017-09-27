@@ -1,0 +1,36 @@
+#A.15
+import numpy as np
+import matplotlib.pyplot as plt
+
+def factorial(number):
+    '''
+    mark: 
+    factorial(0)=1 like it should in
+    this exercise, but not in general
+    '''
+    a=1
+    for n in range(number):
+        a=a*(n+1)
+    return float(a)
+
+def cos_Taylor(x,N):
+    '''
+    From Rottman we have that
+    cos x = 1-x^2/2!+x^4/4!...
+    '''
+    alist=[]
+    s=0
+    for n in range(N):
+        a=(-1)**n
+        n=2*n
+        s+=a*(x**n/factorial(n))
+    return s
+
+xlist=np.linspace(0,4*np.pi,1000)
+ylist=[]
+
+for x in xlist:
+    ylist.append(cos_Taylor(x,20))
+
+plt.plot(xlist,ylist)
+plt.show()

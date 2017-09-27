@@ -1,0 +1,29 @@
+#1.11
+import numpy as np
+a=0.11              #m
+A=np.pi*a**2        #m**2
+sigma=1.2           #kg/m**3
+m=0.43              #kg
+g=9.81              #m/s**2
+Cd=0.2
+
+Fg=m*g
+def airforce(V):
+    Fd=0.5*Cd*sigma*A*V**2
+    return Fd
+
+v=120
+v=v/3.6
+AF=airforce(v)
+print '---------------------------------'
+print 'Gravity force: %.1f' % Fg
+print 'Air force: %.1f' % AF
+print 'Ratio: %f' % (AF/Fg)
+
+v=10
+v=v/3.6
+AF=airforce(v)
+print '---------------------------------'
+print 'Gravity force: %.1f' % Fg
+print 'Air force: %.1f' % AF
+print 'Ratio: %f' % (AF/Fg)

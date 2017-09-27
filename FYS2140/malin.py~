@@ -1,0 +1,3 @@
+M='malin'
+for bokstav in malin:
+    print bokstav

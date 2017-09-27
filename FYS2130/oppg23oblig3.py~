@@ -1,0 +1,12 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.io.wavfile import read
+import wave
+
+data=open('piccolohigh.wav')
+data=np.array(data)
+
+data1=open('piccolohigh.wav')
+N=2**16
+
+#data.close()

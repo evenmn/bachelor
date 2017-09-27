@@ -1,0 +1,26 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Theory}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Ising model}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Numerical expressions}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Periodic Boundary Conditions \(PBC\)}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Dimensionless variables and scaling}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Analytical expressions and values}{section.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.5.1}{Microstates and macrostates of L=2}{subsection.2.5}% 8
+\BOOKMARK [3][-]{subsubsection.2.5.2}{Analytical expressions}{subsection.2.5}% 9
+\BOOKMARK [2][-]{subsection.2.6}{Phase transformations and critical temperature}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{Method and implementation}{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{Implementation of PBC}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.2}{Computing energy and magnetization efficiently}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.3}{The Metropolis algorithm}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.4}{Minimize CPU time}{section.3}% 15
+\BOOKMARK [1][-]{section.4}{Results}{}% 16
+\BOOKMARK [2][-]{subsection.4.1}{Average energy and magnetization}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.2}{Ratio of accepted flips and total flips}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.3}{Probability and energy variance}{section.4}% 19
+\BOOKMARK [2][-]{subsection.4.4}{The behaviour of systems around the critical temperature}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.5}{Estimation of the critical temperature}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.6}{Benchmarks}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.7}{Time analyses with and without parallelizing}{section.4}% 23
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 24
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 25
+\BOOKMARK [1][-]{section.7}{Bibliography}{}% 26

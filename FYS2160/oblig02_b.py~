@@ -1,0 +1,21 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+N = 100
+T = np.linspace(1e-8,70,100)
+J = np.linspace(0,N,N+1)
+
+for j in J:
+    P = (2*j+1)*np.exp(-j*(j+1)/T)
+    plt.plot(T,P)
+plt.show()
+
+M=20
+T = np.linspace(1e-8,70,M)
+J = np.linspace(0,M,N)
+
+for t in T:
+    P = (2*J+1)*np.exp(-J*(J+1)/t)
+    plt.plot(J,P)
+#plt.axis([0,20,0,220])
+plt.show()

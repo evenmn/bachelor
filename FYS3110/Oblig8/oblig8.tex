@@ -1,0 +1,294 @@
+\documentclass{scrartcl}
+\usepackage{physics}   % Matrices and Dirac-notation
+\usepackage{amsmath}   % Binear equations
+\usepackage{booktabs}  % Tabs
+\usepackage{graphicx}  % Pictures/figures
+\usepackage{listings}  % Source code
+\usepackage{color}     % Colors
+\usepackage{mdframed}  % Frames
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+%Defining source code
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\begin{document}
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE $\star\star\star\star\star\star\star\,\star $  \par}
+	\vspace{4cm}
+	{\scshape\huge FYS3110 - Quantum Mechanics  \par}
+	\vspace{1cm}
+	{\scshape\Large Oblig 08\par}
+	\vspace{2cm}
+	{\Large\itshape Even Marius Nordhagen\par}
+	\vfill
+	{\large \today\par}
+\end{titlepage}
+
+\section*{Problem 8.1}
+We have the Hamiltonian
+\begin{equation}
+H=-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+\alpha|x|
+\end{equation}
+In the principle we can choose an arbitrary trial wave function, but it needs to be zero in the boundary points. I will use a Gaussian function:
+\begin{equation}
+\psi(x)=Ae^{-bx^2}
+\label{eq:trial}
+\end{equation}
+where $b$ is a real positive number. The Hamiltonian can be separated into a kinetic part and a potential part:
+\begin{equation}
+\langle H\rangle=\langle T\rangle+\langle V\rangle
+\end{equation}
+where I will calculate the expectation values with integral representation:
+\begin{equation*}
+\langle T\rangle = \int_{-\infty}^{\infty} A^*e^{-bx^2}\cdot -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}Ae^{-bx^2}dx=-\frac{\hbar^2}{2m}\bigg(4b^2\int_{-\infty}^{\infty} x^2e^{-2bx^2}dx-2b\int_{-\infty}^{\infty} e^{-2bx^2}dx\bigg)
+\end{equation*}
+From the Gaussian integrales in Rottmann\footnote{Rottmann, Karl. \textit{Matematisk Formelsamling} (2004). 8th edition. Spektrum Forlag.\newline Referred to as Rottmann (PAGE, EQUATION)} (p.155, e.49), we can see that the first integral is equal to $\frac{1}{4b}\sqrt{\frac{\pi}{2b}}$ and the latter is $\sqrt{\frac{\pi}{2b}}$. $A$ is called the normalization constant, and can be found from the normalization:
+\begin{equation*}
+\braket{\psi}{\psi}=|A|^2\int_{-\infty}^{\infty} e^{-2bx^2}dx=|A|^2\sqrt{\frac{\pi}{2b}}=1
+\end{equation*}
+where I again have used the integral from Rottmann:
+\begin{equation}
+|A|^2\equiv\sqrt{\frac{2b}{\pi}}
+\end{equation}
+\begin{equation}
+\Rightarrow \langle T\rangle = \frac{\hbar^2b}{2m}
+\label{eq:Kinetic}
+\end{equation}
+\begin{equation*}
+\langle V\rangle = |A|^2\alpha\int_{-\infty}^{\infty}e^{-2bx^2}|x|dx=|A|^2\alpha\bigg(-\int_{-\infty}^{0}e^{-2bx^2}xdx+\int_0^{\infty}e^{-2bx^2}xdx\bigg)
+\end{equation*}
+where I decided to split up the integral to get rid of the absolute value. The last integral has value $1/4b$ and from symmetry considerations we can find that the first integral has value $-1/4b$ (Rottmann (p.155, e.50)) (see short explanation of the gamma function $\Gamma(x)$ in exercise 8.2). 
+\begin{equation}
+\langle V\rangle = |A|^2\frac{\alpha}{2b}=\frac{\alpha}{\sqrt{2b\pi}}
+\end{equation}
+In total we obtain the expectation value
+\begin{equation}
+\langle H\rangle = \frac{\hbar^2b}{2m} + \frac{\alpha}{\sqrt{2b\pi}}
+\end{equation}
+The next step is to find the minimum. Since we only have one free parameter ($b$), we can simply derivative the expression with respect to $b$ and set the result to zero to find the extremal points:
+\begin{equation*}
+\frac{d}{db}\langle H\rangle = \frac{\hbar^2}{2m}-\frac{1}{2}\frac{\alpha}{\sqrt{2\pi b^3}}=0.
+\end{equation*}
+This gives
+\begin{equation}
+b=\bigg(\frac{m}{\hbar^2}\frac{\alpha}{\sqrt{2\pi}}\bigg)^{2/3}
+\end{equation}
+so this is an extremal point, but is it a minimum? We can check this with finding the sign of the second derivative:
+\begin{equation*}
+\frac{d^2}{db^2}\langle H\rangle = \frac{\hbar^2}{2m}+\frac{3}{4}\frac{\alpha}{\sqrt{2\pi b^5}}.
+\end{equation*}
+The second derivative is positive, so the extremal point is a minimum! Let us insert the expression into the Hamiltonian expectation expression:
+\begin{equation}
+\langle H\rangle = \frac{\hbar^2}{2m}\bigg(\frac{m}{\hbar^2}\frac{\alpha}{\sqrt{2\pi}}\bigg)^{2/3}+\frac{\alpha}{\sqrt{2\pi}}\bigg(\frac{m}{\hbar^2}\frac{\alpha}{\sqrt{2\pi}}\bigg)^{-1/3}
+\end{equation}
+Now we need to use the variational principle, which states that the ground state energy is smaller or equal to the expectation value of the Hamiltonian, that is the expectation value of energy (the principle is quite logical). If the functional form of the ground-state wave function is guessed correctly, then the variational method gives the true ground-state wave function. Mathematically it can be written as
+\begin{equation}
+\langle H\rangle=\frac{\mel{\psi}{H}{\psi}}{\braket{\psi}{\psi}}\ge E_0.
+\end{equation}
+So we know that the ground state is at least as small as the energy expectation value that we found. We are not able to calculate the exact value, because we do not have the values of the constants.
+\section*{Problem 8.2}
+I will find energy expectation value for one-, two- and three-dimensional Dirac delta function potential, even though only the 3D-case is required.
+\subsection*{3D}
+We have now the Hamiltonian
+\begin{equation}
+H=-\frac{\hbar^2}{2m}\nabla^2-\alpha\delta^3(\vec{r})
+\end{equation}
+which can be separated into a kinetic and a potential energy part, just like in exercise 8.1. We are given the trial wave function
+\begin{equation}
+\psi_L=Ae^{-r^2/2L^2}
+\end{equation}
+where $r^2=x^2+y^2+z^2$. We can find the expectation value using Cartesian coordinates or spherical coordinates. If we want to make the fewest number of calculations, we should choose spherical coordinates, but the calculations become more intuitive by using Cartesian coordinates, so I will do it the inefficient way.  Again we can separate the Hamiltonian into a kinetic and a potential part, and I will start normalizing the wave function:
+\begin{equation*}
+\braket{\psi_L}{\psi_L}=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} A^*e^{-(x^2+y^2+x^2)/2L^2}Ae^{-(x^2+y^2+x^2)/2L^2}dxdydz
+\end{equation*}
+\begin{equation*}
+|A|^2\int_{-\infty}^{\infty} e^{-x^2/L^2}dx\int_{-\infty}^{\infty} e^{-y^2/L^2} dy\int_{-\infty}^{\infty} e^{-z^2/L^2} dz
+\end{equation*}
+This is Gaussian integrals, which are hard to solve with the basic integration rules. Equation 50 on page 155 in Rottmann we can find the relation
+\begin{equation}
+\int_0^{\infty} e^{-\lambda x^2} x^k dx = \frac{1}{2}\lambda^{-\frac{k+1}{2}}\Gamma\bigg(\frac{k+1}{2}\bigg)
+\label{eq:GoldenFormula}
+\end{equation}
+where the gamma function $\Gamma(x)$ has the properties
+\begin{itemize}
+\item $\Gamma(x+1)=x\Gamma(x)$
+\item $\Gamma(1)=1$
+\item $\Gamma(1/2)=\sqrt{\pi}$.
+\end{itemize}
+These give the normalization constant (squared)
+\begin{equation}
+|A|^2\equiv \frac{8}{\pi^{3/2}L^3}
+\end{equation}
+We can now calculate the expectation value, and I will start with the kinetic part
+\begin{equation*}
+\langle T\rangle=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} A^*e^{-(x^2+y^2+z^2)/2L^2}\cdot-\frac{\hbar^2}{2m}\bigg(\frac{d^2}{dx^2}+\frac{d^2}{dy^2}+\frac{d^2}{dz^2}\bigg)Ae^{-(x^2+y^2+z^2)/2L^2}dxdydz
+\end{equation*}
+With some sub calculations, we can find that 
+\begin{equation*}
+\frac{d^2}{dx^2}\Big(e^{-(x^2+y^2+z^2)/2L^2}\Big)=\bigg(-\frac{1}{L^2}+\frac{x^2}{L^4}\bigg)e^{-(x^2+y^2+x^2)/2L^2}
+\end{equation*}
+and similar for the second derivative of y and z. Then we get the integral
+\begin{equation*}
+\langle T\rangle = -\frac{\hbar^2}{2m}|A|^2\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\bigg(-\frac{1}{L^2}-\frac{1}{L^2}-\frac{1}{L^2}+\frac{x^2}{L^4}+\frac{y^2}{L^4}+\frac{z^2}{L^4}\bigg)e^{-(x^2+y^2+z^2)/L^2}dxdydz
+\end{equation*}
+which can be split up to four integrals in each dimension. By using Equation (\ref{eq:GoldenFormula}) the 12 integrals can be solved, and we obtain
+\begin{equation}
+\langle T\rangle = \frac{\hbar^2}{2m}\frac{3L}{16}\pi^{3/2}|A|^2=\frac{3}{4}\frac{\hbar^2}{mL^2}
+\end{equation}
+The potential part can be calculated straight forward (and can maybe be calculated most efficient with Cartesian coordinates). 
+\begin{equation*}
+\langle V\rangle = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}A^*e^{-(x^2+y^2+z^2)/2L^2} \Big(-\alpha\delta(x)\delta(y)\delta(z)\Big)Ae^{-(x^2+y^2+z^2)/2L^2} dxdydz
+\end{equation*}
+\begin{equation*}
+=-\alpha|A|^2\int_{-\infty}^{\infty}e^{-x^2/L^2}\delta(x)dx \int_{-\infty}^{\infty}e^{-y^2/L^2}\delta(y)dy \int_{-\infty}^{\infty}e^{-z^2/L^2}\delta(z)dz
+\end{equation*}
+The general integral over the delta function where we integrate over the same positive and negative area is
+\begin{equation}
+\int_{-b}^bf(x)\delta(x-a)dx=f(a)
+\end{equation}
+In our setting $f(x)=e^{-x^2/L^2}$, and since all the $a$'s are 0, the integrals become 1. 
+\begin{equation}
+\langle V\rangle = -\frac{8\alpha}{\pi^{3/2}L^3}
+\end{equation}
+In total we have 
+\begin{equation}
+\langle H\rangle = \frac{3}{4}\frac{\hbar^2}{mL^2}-\frac{8\alpha}{\pi^{3/2}L^3}
+\end{equation}
+which is minimized when
+\begin{equation}
+L=\frac{16\alpha m}{\hbar^2\pi^{3/2}}\quad\Rightarrow\quad\langle H\rangle = \frac{1}{4}\frac{\hbar^6\pi^3}{16^2\alpha^2m^2}
+\end{equation}
+This expectation value is smaller than the ground state energy, so it cannot be real.
+
+\subsection*{2D}
+For er two-dimensional problem we have the Hamiltonian
+\begin{equation}
+H=-\frac{\hbar^2}{2m}\bigg(\frac{d^2}{dx^2}+\frac{d^2}{dy^2}\bigg)-\alpha\delta(x)\delta(y)
+\end{equation}
+and the trial wave function
+\begin{equation}
+\psi_L=Ae^{-(x^2+y^2)/2L^2}.
+\end{equation}
+Here we obviously need to use Cartesian coordinates, and I will start finding the normalization constant
+\begin{equation*}
+\braket{\psi_L}{\psi_L}=|A|^2\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{-(x^2+y^2)/L^2}dxdy
+\end{equation*}
+We can separate the double integral into two separate integrals, something I will do several times in this exercise
+\begin{equation*}
+\Rightarrow |A|^2\int_{-\infty}^{\infty} e^{-x^2/L^2}dx\int_{-\infty}^{\infty} e^{-y^2/L^2}dy
+\end{equation*}
+Each of the integrals can be solved using the integral introduced in the 3-dimensional part, and we obtain
+\begin{equation*}
+1=|A|^2\cdot \frac{L}{2}\sqrt{\pi}\cdot \frac{L}{2}\sqrt{\pi}=|A|^2\frac{\pi L^2}{4}
+\end{equation*}
+\begin{equation}
+\Rightarrow |A|^2=\frac{4}{\pi L^2}
+\end{equation}
+\begin{equation*}
+\langle T\rangle =\int_{-\infty}^{\infty} \int_{-\infty}^{\infty}A^*e^{-(x^2+y^2)/2L^2}\cdot -\frac{\hbar^2}{2m}\bigg(\frac{d^2}{dx^2}+\frac{d^2}{dy^2}\bigg)Ae^{-(x^2+y^2)/2L^2}dxdy
+\end{equation*}
+After doing the intern derivation, we get
+\begin{equation*}
+\langle T\rangle = -\frac{\hbar^2}{2m}|A|^2\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} e^{-(x^2+y^2)/L^2}\bigg(\frac{x^2}{L^4}+\frac{y^2}{L^4}-\frac{2}{L^2}\bigg)dxdy
+\end{equation*}
+so we get three integrals. The first one is
+\begin{equation*}
+\frac{1}{L^4}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} x^2e^{-(x^2+y^2)/L^2}dxdy=\frac{1}{L^4}\int_{-\infty}^{\infty} x^2e^{-x^2/L^2}dx\int_{-\infty}^{\infty} e^{-y^2/L^2}dy.
+\end{equation*}
+We have seen those integrals before, and know the solutions for the three dimensional problem. We get the exact same result from the second integral, while the last one can be separated into two similar integrals. Anyway we get
+\begin{equation}
+\langle T\rangle = -\frac{\hbar^2}{2m}|A|^2\bigg(\frac{1}{L^4}\frac{\pi L^4}{8}+\frac{1}{L^4}\frac{\pi L^4}{8}-\frac{2}{L^2}\frac{\pi L^2}{4}\bigg)=\frac{\hbar^2}{2mL^2}
+\end{equation}
+The potential part is
+\begin{equation*}
+\langle V\rangle = -\alpha|A|^2\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}e^{-(x^2+y^2)/L^2}\delta(x)\delta(y)dxdy
+\end{equation*}
+\begin{equation*}
+\langle V\rangle = -\alpha|A|^2\int_{-\infty}^{\infty}e^{-x^2/L^2}\delta(x)dx\int_{-\infty}^{\infty}e^{-y^2/L^2}\delta(y)dy
+\end{equation*}
+As we have seen earlier, each of these integrals are equal to 1. 
+\begin{equation}
+\langle V\rangle = -\frac{4\alpha}{\pi L^2}
+\end{equation}
+This results in 
+\begin{equation}
+\langle H\rangle = \frac{\hbar^2}{2mL^2}-\frac{4\alpha}{\pi L^2}.
+\end{equation}
+The $L$ is falling away here, so I did something wrong (wrong units). I will not spend more time on this mandatory part, but I know something is wrong. 
+
+\subsection*{1D}
+In one dimension, we have the Hamiltonian 
+\begin{equation}
+H=-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}-\alpha\delta(x)
+\end{equation}
+The kinetic part is just the same as in exercise 8.1 (see Equation (\ref{eq:Kinetic})). I will use the same trial wave function as in exercise 8.1 (Equation (\ref{eq:trial})), but in my case $b=1/2L^2$.  The potential part is given by
+\begin{equation*}
+\langle V\rangle=-\alpha|A|^2\int_{-\infty}^{\infty}e^{-x^2/L^2}\delta(x)dx
+\end{equation*}
+This integral is equal to 1. The normalization constant is the same as for exercise 8.1 (but $b=1/L^2$):
+\begin{equation}
+\Rightarrow \langle V\rangle = -\alpha|A|^2 = -\alpha\frac{1}{\pi^{1/2}L}
+\end{equation}
+\begin{equation}
+\langle H\rangle = \frac{\hbar^2}{4mL^2}-\alpha\frac{1}{\pi^{1/2}L}
+\end{equation}
+We can minimize this, finding that
+\begin{equation}
+L=\frac{\hbar^2\pi^{1/2}}{2m\alpha}
+\end{equation}
+And inserting into $\langle H\rangle$:
+\begin{equation}
+\langle H\rangle_{min}=-\frac{m\alpha^2}{\pi\hbar^2}
+\end{equation}
+The delta function potential has ground state $E_0=-m\alpha^2/2\hbar^2$, which is smaller than the expectation value that we found above (the variational principle is satisfied). 
+
+\section*{Problem 8.3}
+Our task in this exercise is simply to minimize the expression
+\begin{equation}
+E_{tr}=\frac{E_1}{x^6+y^6}\bigg(-x^8+2x^7+\frac{1}{2}x^6y^2-\frac{1}{2}x^5y^2-\frac{1}{8}x^3y^4+\frac{11}{8}xy^6-\frac{1}{2}y^8\bigg)
+\end{equation}
+with respect to $Z_1$ and $Z_2$ where $x=Z_1+Z_2$ and $y=2\sqrt{Z_1Z_2}$. This can be done analytical, but that is a long computation. Instead we can solve this numerically, with the standard "analytical method", deriving and finding the parameters where the derivative is equal to zero, or we can find the extreme points with a double loop and an if-test. Finally we can also find the minimums graphic, but that is not a good way to do it considering the errors. I will use the method with a double loop, which is probably the best one. To avoid complex numbers, I will find the minimum value of $E_{tr}$ when $Z_1,Z_2\in[0,10]$, which is done by the script
+\begin{lstlisting}
+x = linspace(0, 10, 100)
+minimum = 1000			#Just a big number
+for i in x:
+    for j in x:
+        if ETR(i,j) < minimum:
+            minimum = ETR(i,j)
+\end{lstlisting}
+With this I find that the minimum point of the trial energy is $-13.945 eV$, which is in fact smaller than $E_1=-13.6 eV$! This means that two electrons can be bound to a proton. \newline
+\textit{The program code can be found in Appendix A}.
+
+\section*{Code Attachment}
+\subsection*{Appendix A}
+\lstinputlisting[language=Python]{oblig8.3.py}
+In this script I first define the ground state energy (of Hydrogen), and then I have made a function which takes $Z_1$ and $Z_2$ as arguments and returns the trial energy $E_{tr}$. I minimize this function with a double for-loop (as mentioned above), and print the results. The program will now print
+\begin{lstlisting}
+The minimum trial energy is -13.945 eV
+Two electrons and one proton can form a bound state
+\end{lstlisting}
+\end{document}

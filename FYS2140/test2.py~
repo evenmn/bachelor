@@ -1,0 +1,198 @@
+from scipy import *
+from scipy import optimize
+import numpy as np
+import matplotlib.pyplot as plt
+
+def solve_eigenproblem(H):
+    """
+    Solve an eigenproblem and return the eigenvalues and eigenvectors.
+    """
+    vals, vecs = np.linalg.eig(H)
+    idx = np.real(vals).argsort()
+    vals = vals[idx]
+    vecs = vecs.T[idx]
+
+    return vals, vecs
+
+def mod_kron(N, n, m):
+    return (n == m)
+
+def assemble_K(N, k, x_min, x_max, sparse=False):
+    """
+    Assemble the matrix representation of the kinetic energy contribution
+    to the Hamiltonian.
+
+    k = -hbar**2 / 2 m
+    """
+    dx = (x_min - x_max) / N
+
+    K = np.zeros((N, N)).astype(np.complex)
+
+    for m in range(0, N):
+        for n in range(0, N):
+            K[m, n] = k / (dx ** 2) * (
+                mod_kron(N, m + 1, n) - 2 * mod_kron(N, m, n) +
+                mod_kron(N, m - 1, n))
+    return K
+
+
+def assemble_V(N, u, x_min, x_max, sparse=False):
+    """
+    Assemble the matrix representation of the potential energy contribution
+    to the Hamiltonian.
+    """
+    V = np.zeros((N, N)).astype(np.complex)
+
+    for m in range(N):
+        for n in range(N):
+            V[m, n] = u[m] * mod_kron(N, m, n)
+    return V
+
+
+def basis_step_evalute(N, u, x):
+    """
+
+    """
+    return u
+
+
+def assemble_u_potential(N, u_func, x, args, sparse=False):
+    """
+
+    """
+    return u_func(x, args)
+
+
+def wavefunction_norm(x, psi):
+    """
+    Calculate the norm of the given wavefunction.
+    """
+
+    dx = x[1] - x[0]
+
+    return (psi.conj() * psi).sum() * dx
+
+
+def wavefunction_normalize(x, psi):
+    """
+    Normalize the given wavefunction.
+    """
+
+    return psi / np.sqrt(wavefunction_norm(x, psi))
+
+
+def expectation_value(x, operator, psi):
+    """
+    Evaluate the expectation value of a given operator and wavefunction.
+    """
+
+    dx = x[1] - x[0]
+
+    return (psi.conj() * operator * psi).sum() * dx
+
+
+def inner_product(x, psi1, psi2):
+    """
+    Evaluate the inner product of two wavefunctions, psi1 and psi2, on a space
+    described by X1 and X2.
+    """
+
+    dx = x[1] - x[0]
+
+    return (psi1.conj() * psi2).sum() * dx
+
+
+def derivative(x, psi):
+    """
+    Evaluate the expectation value of a given operator and wavefunction.
+    """
+
+    dx = x[1] - x[0]
+
+    N = len(psi)
+
+    dpsi = np.zeros(N, dtype=np.complex)
+
+    def _idx_wrap(M, m):
+        return m if m < M else m - M
+
+    for n in range(N):
+        dpsi[n] = (psi[_idx_wrap(N, n+1)] - psi[n-1]) / (2 * dx)
+
+    return dpsi
+
+
+
+
+"""Main program:"""
+
+c = 3.e5			# [nm / ps]
+hBarc = 197.3 		# [eV nm]
+h = 1
+h_ = h/(2*pi)
+
+eProton = 938.27e6 	# rest energy for proton [eV]
+mu = 912.e6 			# [MeV/c^2]
+mm = eProton        # oscillator rest energy [eV]
+x0 = 0.127      # [nm] shift in oscillator potiential minimum
+
+V0 = 10.2 		# [eV]
+D = V0			# V0 [eV]
+b = 12.6		# [nm]
+
+args = {'D': D, 'b': b}
+
+k = -h_ ** 2 / (2 * mm) 	# TUSL constant
+k = -hBarc**2/(2*mm)
+
+x_min = 0.
+x_max = .35
+N = 750
+
+def U_morse(x, args):
+    """
+    Morse oscillator potential
+    """
+    D = args['D']
+    b = args['b']
+    u = D * (1 - exp(-b*(x-x0))) ** 2 	# accounted for shift x0 in min point
+    return u
+
+"""
+
+Find the minimum point for the potential
+
+"""
+
+
+x = linspace(x_min, x_max, N)
+
+U = U_morse(x, args);
+
+x_opt_min = optimize.fmin(U_morse, [0.0], (args,))
+
+print("Found potential minima at = %f" % x_opt_min)
+
+"""
+
+Eigenstates and eigenvalues
+
+"""
+
+u = assemble_u_potential(N, U_morse, x, args)
+K = assemble_K(N, k, x_min, x_max)
+V = assemble_V(N, u, x_min, x_max)
+
+H = K + V
+evals, evecs = solve_eigenproblem(H)
+
+NN = 2
+
+fig, axes = plt.subplots(NN, 1, figsize=(10,NN*1), sharex=True, sharey=True)
+
+for n in range(NN):
+	Y = evecs[NN-n-1]	# reversing order for plotting	
+	axes[n].plot(x, Y.real)
+
+axes[n].set_xlabel(r'$x$', fontsize=18);
+plt.show()

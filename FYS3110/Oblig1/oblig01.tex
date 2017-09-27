@@ -1,0 +1,180 @@
+\documentclass{scrartcl}
+\usepackage{physics}
+
+\title{FYS3110\\Quantum Mechanics}
+\subtitle{Oblig 01}
+\author{Even Marius Nordhagen}
+\date{\today}
+
+\begin{document}
+\maketitle
+\newpage
+\section{Introduction}
+The purpose of this problem set is to repeat what we have learned in the linear algebra courses, and to be familiar with the Dirac notation.
+
+\section{Exercise 1}
+We start with this ket:\par
+\begin{equation}
+\ket{\psi}=c(\sqrt{5}\ket{0})+i\ket{1}
+\end{equation}
+\paragraph{a)}
+\begin{equation*}
+\bra{\psi}\ket{\phi}=\bra{\phi}\ket{\psi}^*=c^*(\sqrt{5}\bra{\phi}\ket{0}^*-i\bra{\phi}\ket{1}^*)
+\end{equation*}
+\begin{equation*}
+=c^*(\sqrt{5}\bra{0}\ket{\phi}-i\bra{1}\ket{\phi})
+\end{equation*}
+\begin{equation*}
+=c^*(\sqrt{5}\bra{0}-i\bra{1})\ket{\phi}=\bra{\psi}\ket{\phi}
+\end{equation*}
+So $\bra{\psi}$ has to be
+\begin{equation}
+\bra{\psi}=c^*(\sqrt{5}\bra{0}-i\bra{1})
+\end{equation}
+I want to find the value of $c$ when the hypotenuse is fixed to $1$. This is found by Pythagoras:
+\begin{equation*}
+1=\sqrt{c^2\sqrt{5}^2+c^2}=c\sqrt{6}
+\end{equation*}
+\begin{equation}
+c=\frac{1}{\sqrt{6}}
+\end{equation}
+
+\paragraph{b)}
+We have that
+$$\ket{0}\simeq\begin{pmatrix}1\\0\end{pmatrix},\quad \ket{1}\simeq\begin{pmatrix}0\\1\end{pmatrix}$$
+
+I want to write $\ket{\psi}$ as a matrix, and from Equation (1) I see that
+\begin{equation}
+\ket{\psi}=c(\sqrt{5}\begin{pmatrix}1\\0\end{pmatrix}+i\begin{pmatrix}0\\1\end{pmatrix})
+=c\begin{pmatrix}\sqrt{5}\\i\end{pmatrix}
+\end{equation}
+I also want to find the $\hat{A}$-matrix, and for that I need the equations
+$$\hat{A}\ket{0}=-i\ket{1},\quad\hat{A}\ket{1}=i\ket{0}$$
+On matrix form I then have two equations
+$$\begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}\begin{pmatrix}1\\0\end{pmatrix}
+=\begin{pmatrix}0\\-i\end{pmatrix},\quad\begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}\begin{pmatrix}0\\1\end{pmatrix}
+=\begin{pmatrix}i\\0\end{pmatrix}$$
+Which leads to $a_{11}=0,\;a_{12}=i,\;a_{21}=-i,\;a_{22}=0$, and
+\begin{equation}
+\hat{A}=\begin{pmatrix}0&i\\-i&0\end{pmatrix}
+\end{equation}
+
+\paragraph{c)}
+First I want to compute $\expval{\hat{A}}{\psi}$ by using the representation in the previous sub exercise, but then I need to find $\bra{\psi}$ on matrix form. The question is, what are $\bra{0}$ and $\bra{1}$ represented by?\par \vspace{3mm}
+This is not so hard, on the basis of normalization we can write
+$$\braket{0}{0}=\bra{0}\begin{pmatrix}1\\0\end{pmatrix}=1$$
+$$\braket{1}{1}=\bra{1}\begin{pmatrix}0\\1\end{pmatrix}=1$$
+which tell us that 
+$$\bra{0}\simeq(1,0),\quad\bra{1}\simeq(0,1)$$
+If we insert these in Equation (2), we easily find that
+$$\bra{\psi}=c^*(\sqrt{5},-i)$$
+and finally we can begin computing $\expval{\hat{A}}{\psi}$:
+\begin{equation*}
+\expval{\hat{A}}{\psi}=c^*(\sqrt{5},-i)\begin{pmatrix}0&i\\-i&0\end{pmatrix}
+c\begin{pmatrix}\sqrt{5}\\i\end{pmatrix}=c^*c(-\sqrt{5}-\sqrt{5})
+\end{equation*}
+$$\expval{\hat{A}}{\psi}=\underline{-2\sqrt{5}c^2}$$\par \vspace{5mm}
+Now I want to compute $\expval{\hat{A}}{\psi}$ directly from the definitions:
+$$\expval{\hat{A}}{\psi}=\bra{\psi}\hat{A}|c(\sqrt{5}\ket{0}+i\ket{1})$$
+$$=\bra{\psi}c(\sqrt{5}\hat{A}\ket{0}+i\hat{A}\ket{1})$$
+$$=\bra{\psi}c(-\sqrt{5}i\ket{1}+i^2\ket{0})$$
+I also need to use my expression of $\bra{\psi}$ from Equation 2:
+$$\Rightarrow c^*(\sqrt{5}\bra{0}-i\bra{1})c(-\sqrt{5}i\ket{1}-\ket{0})$$
+$$=c^*c(-5i\braket{0}{1}-\sqrt{5}\braket{0}{0}-\sqrt{5}\braket{1}{1}+i\braket{1}{0})$$
+$$\expval{\hat{A}}{\psi}=\underline{-2\sqrt{5}c^2}$$
+\vspace{5mm}
+Mark: The inner products $\braket{i}{j}$ are valued by
+\begin{equation}
+\braket{i}{j} =
+    \begin{cases}
+            1, &         \text{if } i=j,\\
+            0, &         \text{if } i\neq j.
+    \end{cases}
+\end{equation}
+and is called the Kronecker delta $\delta_{ij}$.
+ 
+
+\section{Exercise 2}
+$$U=\begin{pmatrix}a&b\\c&d\end{pmatrix}$$
+\paragraph{a)}
+$$U^T=\begin{pmatrix}a&c\\b&d\end{pmatrix},\quad
+U^\dagger=\begin{pmatrix}a^*&c^*\\b^*&d^*\end{pmatrix}$$
+\paragraph{b)}
+A hermitian matrix is equal to its own conjugate transposed. With other words, if $U$ is hermitian, it has to satisfy
+$$U=\begin{pmatrix}a&b\\c&d\end{pmatrix}=\begin{pmatrix}a^*&c^*\\b^*&d^*\end{pmatrix}$$
+This give us this set of equations:
+\renewcommand{\labelenumi}{\roman{enumi}}
+\begin{enumerate}
+\item .\quad $a=a^*$
+\item .\quad $d=d^*$
+\item .\quad $b=c^*$
+\item .\quad $c=b^*$
+\end{enumerate}
+Equation 1 and 2 tell us that $a$ and $d$ have to be real numbers, and equation 3 and 4 tell us that $b$ and $c$ have to be in the same number category (both have to be either real or complex).
+\paragraph{c)}
+I compute the the eigenvalues by the standard formula
+\begin{equation}
+det(U-\lambda I)
+\end{equation}
+$$=\mqty|a-\lambda&b\\c&d-\lambda|=(a-\lambda)(d-\lambda)-bc
+=\lambda^2-(a+d)\lambda+(ad-bc)=0$$
+To find the roots for this characteristic polynomial, I have to use the famous ABC-formula:
+\begin{equation}
+\lambda=\frac{-B\pm\sqrt{B^2-4AC}}{2A}
+\end{equation}
+In our case $A=1$, $B=-(a+d)$ and $C=(ad-bc)$. By inserting this, we will get that
+\begin{equation}
+\lambda=\frac{(a+d)\pm\sqrt{(a+d)^2-4(ad-bc)}}{2}=\frac{a+d\pm\sqrt{(a-d)^2+4bc}}{2}
+\end{equation}
+I can not take this longer, but this is good enough for proving that the eigenvalues always are real when $U$ is hermitian. There are two ways that $\lambda$ can be complex. 
+A possibility is when one or more of the constants are complex. In the previous sub exercise we saw that $a$ and $d$ must be real, and since $4bc=4c^*c \in \Re $, we should not worry about this case.
+\par \vspace{3mm}
+An other way that $\lambda$ may could be complex, is if the square root is negative. This is neither possible, because both of the terms must me positive. So $\lambda$ has to be a real number.
+\paragraph{d)}
+We call a matrix unitary when it has the properties 
+\begin{equation*}
+U^*U=UU^*=I,\quad U^\dagger U=UU^\dagger=I
+\end{equation*}
+and we have already seen that a matrix 
+$$U=\mqty(a & b \\ c & d)$$
+is hermitian when $a$ and $d$ are real numbers, and $b$ and $c$ are in the same category. A hermitian unitary matrix therefore has to satisfy the matrix equation
+$$\mqty(a & b \\ c & d)\mqty(a & b \\ c & d)=\mqty(aa + bc & ab + bd \\ ac + cd & bc + dd)=\mqty(\imat{2})$$
+From this we can find a set with four independent equations:
+\renewcommand{\labelenumi}{\roman{enumi}}
+\begin{enumerate}
+\item .\quad $a^2+bc=1$
+\item .\quad $ab+bd=0$
+\item .\quad $ac+cd=0$
+\item .\quad $bc+d^2=1$
+\end{enumerate}
+Of course I could solve this set of equation by row operations on the matrix, but I think it goes just as fast to solve the equations on the "primary school way". Anyway we get two different solutions that depends on how we choose $b$:
+\renewcommand{\labelenumi}{\roman{enumi}}
+\begin{enumerate}
+\item .\quad $b=0:$
+We can see that this is a solution that satisfies equation ii. and iii., and we have
+$$a^2=d^2=1$$ 
+\item .\quad $b\neq 0:$
+This is of course also a possible solution which gives us that 
+$$a=\pm\sqrt{1-b^2},\quad d=\mp\sqrt{1-b^2},\quad a=-d$$
+Mark: Since $a$ and $d$ have to be positive, we have to choose a $b$ in the interval $b\in[-1,1]$.
+\end{enumerate}
+\paragraph{e)}
+After we have choose $b$, we can easily find the eigenvalues by inserting into Equation (9). I'll solve it for the two solutions, and I start with $b=0$:
+\renewcommand{\labelenumi}{\Roman{enumi}}
+\begin{enumerate}
+\item $$a=\pm1 \quad b=0\quad c=0\quad d=\pm1$$
+$$\lambda=\frac{\pm1\pm1\pm(\pm1\pm1)}{2}=\pm1$$
+\item $$a=\pm\sqrt(1-b^2)\quad b\neq0 \quad c=b \quad d=-a$$
+$$\lambda=\pm\frac{\sqrt{4(1-b^2)+4b^2}}{2}=\pm1$$
+So the conclusion is that the eigenvalues have to be $\pm$!
+\end{enumerate}
+\section{Exercise 3}
+We start with the following statements:
+$$\hat{H}\ket{\psi}=g\ket{\phi},\quad \hat{H}\ket{\phi}=g^*\ket{\psi},\quad \hat{H}\ket{\gamma_n}=0$$
+If the operator $\hat{H}$ is hermitian, it has to satisfy $\hat{H}^\dagger=\hat{H}$. I will try to find which conditions $\ket{\phi}$ and $\ket{\psi}$ must satisfy if $\hat{H}$ is hermitian:
+$$\mel*{\phi}{\hat{H}}{\psi}=\mel*{\phi}{g}{\phi}=g\braket{\phi}{\psi}=g$$
+$$\mel*{\phi}{\hat{H^\dagger}}{\psi}=\mel*{\psi}{\hat{H}}{\phi}=g\braket{\psi}{\psi}^*=g\braket{\psi}{\psi}=g$$
+So $\hat{H}$ is hermitian if $\psi$ and $\phi$ are normalized.
+\section{Comment}
+I decided try to write this delivery in English just to improve my English skills. Please tell me if something is terrible, I'm sure I have a lot to learn about writing physic reports in English. 
+\end{document}

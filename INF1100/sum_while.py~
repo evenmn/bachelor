@@ -1,0 +1,10 @@
+#2.10
+s=0
+k=1
+M=10000000
+while k<M:
+    s+=1./k
+    #print s
+    k=k*2
+    #print k
+print s

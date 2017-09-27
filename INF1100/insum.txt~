@@ -1,0 +1,5 @@
+epsilon: 1e-4, exact error: 8.18e-4, n=55
+epsilon: 1e-6, exact error: 9.02e-6, n=97
+epsilon: 1e-8, exact error: 8.70e-8, n=142
+epsilon: 1e-10, exact error: 9.20e-10, n=187
+epsilon: 1e-12, exact error: 9.31e-12, n=233
